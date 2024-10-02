@@ -17,16 +17,34 @@ export default function Interface() {
     const jump = useKeyboardControls((state) => state.jump);
 
     useEffect(() => {
-        addEffect(() => {
-            console.log("tick")
+       const unsubscribeEffect = addEffect(() => {
+            const state = useGame.getState();
+
+            let elapsedTime = 0;
+
+            if(state.phase === 'playing') {
+                elapsedTime = Date.now() - state.startTime
+            } else if(state.phase === 'ended') {
+                elapsedTime = state.endTime - state.startTime
+            }
+            elapsedTime /= 1000;
+            elapsedTime = elapsedTime.toFixed(2);
+
+            if(time.current) {
+                time.current.textContent = elapsedTime;
+            }
         })
+
+        return () => {
+            unsubscribeEffect();
+        }
     }, [])
 
 
     return (
         <div className="interface">
             <div ref={time} className="time">
-                <span>00:00</span>
+                <span>0.00</span>
             </div>
             { phase === 'ended' && <div className="restart" onClick={ restart }><span>Restart</span></div> }
            

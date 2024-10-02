@@ -4,6 +4,7 @@ import { useState, useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
+
 const boxGeometry = new THREE.BoxGeometry(1,1,1)
 
 const floor1Material = new THREE.MeshStandardMaterial({ color: "limegreen" })
@@ -119,7 +120,7 @@ function Bounds({length = 1}) {
 }
 
 
-export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] }) {
+export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe], seed = 0 }) {
 
 
    const blocks = useMemo(() => {
@@ -131,7 +132,7 @@ export default function Level({ count = 5, types = [BlockSpinner, BlockLimbo, Bl
     }
     return blocks;
     
-   }, [count, types])
+   }, [count, types, seed])
 
 
     return <>
