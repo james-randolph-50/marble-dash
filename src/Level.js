@@ -29,7 +29,7 @@ export function BlockEnd({ position = [0,0,0]}) {
 
     return (
         <group position={position}>
-            <mesh geometry={boxGeometry} material={floor1Material} scale={ [4, 0.2, 4]} position={[0, 0, 0]} receiveShadow />
+            <mesh geometry={boxGeometry} material={floor1Material} scale={ [4, 0.2, 4]} position={[0, -0.1, 0]} receiveShadow />
             <RigidBody type="fixed" colliders="hull" position={[0, 0.25, 0]} restitution={0.2} friction={0}>
                 <primitive object={hamburger.scene} scale={0.2} />
             </RigidBody>
